@@ -14,3 +14,6 @@ This project is built with React so we will need to use a package manager, more 
 ## Plans for the Future
 * Give users the ability to see past questions + answers.
 * Sound for correct and incorrect answers
+
+## Bug fixed after application period
+* Play again bug loaded same questions from the previous round
