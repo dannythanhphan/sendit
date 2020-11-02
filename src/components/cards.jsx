@@ -66,7 +66,7 @@ class Cards extends React.Component {
     }
 
     generateChoices = (incorrect, correct) => {
-        let choices = incorrect
+        let choices = incorrect.slice();
         choices.push(correct);
         choices = this.generatePositionOfAnswers(choices);
         this.setState({ generateAnswers: false, currentAnswer: correct })
@@ -85,6 +85,17 @@ class Cards extends React.Component {
         document.getElementsByClassName("cards-submit-button")[0].style.display = "none"
     }
 
+    generateNewQuestions = () => { 
+        let arrayOfIndices = [];
+
+        while (arrayOfIndices.length < 10 ) {
+            let randomNumber = Math.floor(Math.random() * 21)
+            if (!arrayOfIndices.includes(randomNumber)) arrayOfIndices.push(randomNumber);
+        };
+
+        return arrayOfIndices
+    }
+
     componentDidUpdate(prevProps, prevState) {
         const { currentIndex } = this.state;
         const { questionOrder } = this.props;
@@ -93,12 +104,28 @@ class Cards extends React.Component {
             let currentChoices = this.generateChoices(TriviaData[questionOrder[currentIndex]].incorrect, 
                 TriviaData[questionOrder[currentIndex]].correct)
             this.setState({ choices: currentChoices, disabled: true })
+        } else if (currentIndex === 0 && prevState.currentIndex > 0) {
+            let newQuestionOrder = this.generateNewQuestions();
+            let currentChoices = this.generateChoices(TriviaData[newQuestionOrder[currentIndex]].incorrect, 
+                TriviaData[newQuestionOrder[currentIndex]].correct)
+            this.setState({ choices: currentChoices, disabled: true })
         }
     }
 
-    // playAgain = () => {
-    //     
-    // }
+    playAgain = (e) => {
+        e.preventDefault();
+        document.getElementsByClassName("cards-submit-button")[0].style.display = "block"
+        this.setState({
+            usersAnswer: "",
+            currentAnswer: "",
+            score: 0,
+            currentIndex: 0,
+            generateAnswers: true,
+            disabled: true,
+            animation: false,
+            choices: []
+        })
+    }
 
     render() {
         const { currentIndex, score, usersAnswer, choices, disabled } = this.state;
@@ -134,12 +161,12 @@ class Cards extends React.Component {
                     You got {score} / 10 correct!
                 </p>
 
-                {/* <button 
-                    onClick={() => this.playAgain}
+                <button 
+                    onClick={(e) => this.playAgain(e)}
                     className="cards-play-again-button"
                 >
                     Play Again
-                </button> */}
+                </button>
             </div>
         )
 

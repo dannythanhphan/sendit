@@ -151,7 +151,7 @@ button:disabled:hover {
     background-color: white;
     color: lightgray;
 }
-/* 
+
 .cards-play-again-button {
     width: 50%;
     height: 15%;
@@ -161,15 +161,15 @@ button:disabled:hover {
     cursor: pointer;
     outline: none;
     border: 1px solid  black;
-    margin-left: 2%;
-    margin-top: 10%;
+    margin: auto;
+    transition: ease 1s;
 }
 
 .cards-play-again-button:hover {
-    background-color:  rgb(185, 252, 185);
+    background-color:  rgb(252, 239, 239);
     border-radius: 8px;
     cursor: pointer;
     outline: none;
     color: gray;
     border: 1px solid  gray;
-} */
+}
