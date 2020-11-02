@@ -14,7 +14,9 @@ class Cards extends React.Component {
             generateAnswers: true,
             disabled: true,
             animation: false,
-            choices: []
+            choices: [],
+            questions: [],
+            playThrough: 0
         }
     }
 
@@ -76,47 +78,52 @@ class Cards extends React.Component {
         return choices
     }
 
+    
+    hideSubmit = () => {
+        document.getElementsByClassName("cards-submit-button")[0].style.display = "none"
+    }
+    
+    generateNewQuestions = () => { 
+        let arrayOfIndices = [];
+        
+        while (arrayOfIndices.length < 10 ) {
+            let randomNumber = Math.floor(Math.random() * 21)
+            if (!arrayOfIndices.includes(randomNumber)) arrayOfIndices.push(randomNumber);
+        };
+        
+        return arrayOfIndices
+    }
+    
     componentDidMount() {
         const { currentIndex } = this.state;
         const { questionOrder } = this.props;
+
         let currentChoices = this.generateChoices(TriviaData[questionOrder[currentIndex]].incorrect, 
             TriviaData[questionOrder[currentIndex]].correct)
         this.setState({ choices: currentChoices })
     }
 
-    hideSubmit = () => {
-        document.getElementsByClassName("cards-submit-button")[0].style.display = "none"
-    }
-
-    generateNewQuestions = () => { 
-        let arrayOfIndices = [];
-
-        while (arrayOfIndices.length < 10 ) {
-            let randomNumber = Math.floor(Math.random() * 21)
-            if (!arrayOfIndices.includes(randomNumber)) arrayOfIndices.push(randomNumber);
-        };
-
-        return arrayOfIndices
-    }
-
     componentDidUpdate(prevProps, prevState) {
-        const { currentIndex } = this.state;
+        const { currentIndex, questions, playThrough } = this.state;
         const { questionOrder } = this.props;
-        // document.getElementsByClassName("cards-submit-button")[0].disabled = true
+
+        let questionsCheck = playThrough === 0 ? questionOrder.slice() : questions.slice();
+
         if (this.state.currentIndex > prevState.currentIndex && currentIndex < 10) {
-            let currentChoices = this.generateChoices(TriviaData[questionOrder[currentIndex]].incorrect, 
-                TriviaData[questionOrder[currentIndex]].correct)
+            let currentChoices = this.generateChoices(TriviaData[questionsCheck[currentIndex]].incorrect, 
+                TriviaData[questionsCheck[currentIndex]].correct)
             this.setState({ choices: currentChoices, disabled: true })
         } else if (currentIndex === 0 && prevState.currentIndex > 0) {
-            let newQuestionOrder = this.generateNewQuestions();
-            let currentChoices = this.generateChoices(TriviaData[newQuestionOrder[currentIndex]].incorrect, 
-                TriviaData[newQuestionOrder[currentIndex]].correct)
-            this.setState({ choices: currentChoices, disabled: true })
+            let incrementPlaythrough = playThrough + 1;
+            let currentChoices = this.generateChoices(TriviaData[questions[currentIndex]].incorrect, 
+                TriviaData[questions[currentIndex]].correct)
+            this.setState({ choices: currentChoices, disabled: true, playThrough: incrementPlaythrough })
         }
     }
 
     playAgain = (e) => {
         e.preventDefault();
+        let newQuestions = this.generateNewQuestions();
         document.getElementsByClassName("cards-submit-button")[0].style.display = "block"
         this.setState({
             usersAnswer: "",
@@ -126,13 +133,14 @@ class Cards extends React.Component {
             generateAnswers: true,
             disabled: true,
             animation: false,
-            choices: []
+            choices: [],
+            questions: newQuestions
         })
     }
 
     render() {
-        const { currentIndex, score, usersAnswer, choices, disabled } = this.state;
-        const { questionOrder } = this.props;
+        const { currentIndex, score, usersAnswer, choices, disabled, questions, playThrough } = this.state;
+        let questionOrder = playThrough === 0 ? this.props.questionOrder.slice() : questions.slice()
         let displayChoices;
 
         if (choices.length > 1) {
@@ -187,21 +195,8 @@ class Cards extends React.Component {
                         {currentIndex < 10 ? currentIndex : 10} / 10
                     </div>
                 </div>
-                {displayGameOrScore}
-                {/* <div className="question-container">
-                    <div className="cards-question">
-                        {TriviaData[questionOrder[currentIndex]].question}
-                    </div>
-                    <div className="cards-question-container">
-                        {displayChoices}
-                    </div>
-                </div>
 
-                <div className="cards-game-over-container">
-                    <p>
-                        you got {score} / 10 correct!
-                    </p>
-                </div> */}
+                {displayGameOrScore}
 
                 <div className="cards-score-questions-container">
                     <button onClick={(e) => this.submitAnswer(e)} 
