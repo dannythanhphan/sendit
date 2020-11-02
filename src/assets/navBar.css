@@ -1,0 +1,53 @@
+.nav-bar {
+    height: 8vh;
+    width: 99.1vw;
+    background-color: rgb(252, 239, 239);
+    position: sticky;
+    top: 0;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    z-index: 5;
+}
+
+i {
+    font-size: 26px;
+}
+
+.nav-bar-title-icon {
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    text-align: center;
+    margin-left: 20%;
+    margin-top: 15px;
+}
+
+.nav-bar-title {
+    margin-left: 10px;
+}
+
+.nav-bar-socials {
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    margin-top: 15px;
+}
+
+.nav-social-container {
+    display: flex;
+    flex-direction: row;
+    margin-right: 20px;
+    outline: none;
+    text-decoration: none;
+    color: black;
+    transition: ease 1s;
+}
+
+.nav-social-container:hover {
+    color: grey;
+}
+
+.social-text {
+    margin-left: 5px;
+}

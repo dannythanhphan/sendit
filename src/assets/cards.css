@@ -1,0 +1,144 @@
+.cards-container {
+    background-color: rgb(252, 239, 239);
+    height: 50%;
+    width: 50%;
+    min-height: 444px;
+    min-width: 650px;
+    box-shadow: 0px 0px 10px 5px lightgray;
+    border-radius: 8px;
+    padding-top: 3rem;
+    margin: auto;
+}
+
+.question-container {
+    height: 50%;
+}
+
+.cards-game-over-container {
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 33%;
+    font-size: x-large;
+}
+
+p {
+    margin-top: 0;
+}
+
+.cards-question {
+    font-size: large;
+    text-align: center;
+}
+
+.cards-question-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    margin-left: 2rem;
+    height: 100%;
+    justify-content: space-between;
+}
+
+.cards-choice {
+    /* margin: auto; */
+    cursor: pointer;
+    background-color: white;
+    height: 15%;
+    margin: auto;
+    width: 50%;
+    text-align: center;
+    border-radius: 6px;
+    padding-top: 1%;
+    border: 2px solid transparent;
+}
+
+.cards-choice:hover {
+    cursor: pointer;
+    border: 2px solid  rgb(185, 252, 185)
+}
+
+.selected {
+    background-color: rgb(185, 252, 185);
+    width: 50%;
+    height: 15%;
+    /* z-index: 5; */
+}
+
+.cards-submit-button {
+    width: 100px;
+    height: 25px;
+    background-color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    outline: none;
+    border: 1px solid  black;
+    position: absolute;
+    top: 20%;
+    right: 24%;
+    transition: ease 1s;
+}
+
+.cards-submit-button:hover {
+    background-color:  rgb(185, 252, 185);
+    border-radius: 8px;
+    cursor: pointer;
+    outline: none;
+    color: gray;
+    border: 1px solid  gray;
+}
+
+.cards-score-questions-container {
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-evenly; */
+    height: 30%;
+    margin-top: 10%;
+    position: relative;
+}
+
+.display-score {
+    position: absolute;
+    bottom: 0;
+    right: 10%;
+}
+
+.display-num-of-questions {
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+}
+
+button:disabled {
+    border: none;
+    color: lightgray;
+}
+
+button:disabled:hover {
+    border: none;
+    background-color: white;
+    color: lightgray;
+}
+/* 
+.cards-play-again-button {
+    width: 50%;
+    height: 15%;
+    border-radius: 8px;
+    background-color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    outline: none;
+    border: 1px solid  black;
+    margin-left: 2%;
+    margin-top: 10%;
+}
+
+.cards-play-again-button:hover {
+    background-color:  rgb(185, 252, 185);
+    border-radius: 8px;
+    cursor: pointer;
+    outline: none;
+    color: gray;
+    border: 1px solid  gray;
+} */

@@ -1,0 +1,6 @@
+.main-body {
+    background-color: rgb(185, 252, 185);
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
