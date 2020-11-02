@@ -20,16 +20,22 @@ class Cards extends React.Component {
 
     handleAnswer = (e, choice) => {
         e.preventDefault();
-        // document.getElementById(choice).style.display = "block"
+        // document.getElementById(choice).style.display = "none"
         this.setState({ usersAnswer: choice, disabled: false })
     }
 
     submitAnswer = (e) => {
         e.preventDefault();
         const { usersAnswer, currentAnswer, currentIndex, score } = this.state
-
         if (usersAnswer !== currentAnswer) {
-            document.getElementsByClassName(`${usersAnswer}`)
+            // document.getElementsByClassName(`${usersAnswer}`)[0].style.backgroundColor = "red"
+            // document.getElementsByClassName(`${currentAnswer}`)[0].style.backgroundColor = "green"
+            // document.getElementsByTagName("button")[0].disabled = true
+            document.getElementsByClassName(`${usersAnswer}`)[0].childNodes[1].style.display = "block";
+            document.getElementsByClassName(`${currentAnswer}`)[0].childNodes[0].style.display = "block";
+            document.getElementsByTagName("button")[0].disabled = true
+        } else {
+            document.getElementsByClassName(`${currentAnswer}`)[0].childNodes[0].style.display = "block";
         }
 
         setTimeout(() => {
@@ -40,7 +46,7 @@ class Cards extends React.Component {
                 this.setState({ currentIndex: currentIndex + 1})
             }
 
-        }, 3000)
+        }, 2000)
     }
 
     generatePositionOfAnswers = (choices) => {
@@ -106,7 +112,8 @@ class Cards extends React.Component {
                     className={`cards-choice ${choice} ${usersAnswer === choice ? "selected" : ""}`}
                     onClick={(e) => this.handleAnswer(e, choice)} 
                 >
-                    {/* <i className="check-correct fas fa-check" id={choice}></i> */}
+                    <i className="correct-answer fas fa-check"></i>
+                    <i className="incorrect-answer fas fa-times"></i>
                     {choice}
                 </p>
             )

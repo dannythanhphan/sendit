@@ -54,6 +54,8 @@ p {
     padding-top: 1%;
     border: 2px solid transparent;
     position: relative;
+    outline: none;
+    transition: ease 1s;
 }
 
 .cards-choice:hover {
@@ -61,18 +63,31 @@ p {
     border: 2px solid  gray
 }
 
-.cards-choice > .check-correct {
+.cards-choice > .correct-answer {
     display: none;
     position: absolute;
+    color: green;
     left: 3%;
 }
+
+.cards-choice > .incorrect-answer {
+    display: none;
+    position: absolute;
+    color: red;
+    left: 3%;
+}
+
+/* .cards-choice > i {
+    display: block;
+    position: absolute;
+    left: 3%;
+} */
 
 .selected {
     background-color: rgb(252, 239, 239);
     border: 2px solid gray;
     width: 50%;
     height: 15%;
-    /* z-index: 5; */
 }
 
 .cards-submit-button {
