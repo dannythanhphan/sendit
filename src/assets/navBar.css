@@ -25,6 +25,7 @@ i {
 
 .nav-bar-title {
     margin-left: 10px;
+    font-size: larger;
 }
 
 .nav-bar-socials {
@@ -50,4 +51,5 @@ i {
 
 .social-text {
     margin-left: 5px;
+    font-size: larger;
 }

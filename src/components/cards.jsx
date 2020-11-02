@@ -13,25 +13,34 @@ class Cards extends React.Component {
             currentIndex: 0,
             generateAnswers: true,
             disabled: true,
+            animation: false,
             choices: []
         }
     }
 
     handleAnswer = (e, choice) => {
         e.preventDefault();
+        // document.getElementById(choice).style.display = "block"
         this.setState({ usersAnswer: choice, disabled: false })
     }
 
     submitAnswer = (e) => {
         e.preventDefault();
         const { usersAnswer, currentAnswer, currentIndex, score } = this.state
-        if (usersAnswer === currentAnswer) {
-            this.setState({ currentIndex: currentIndex + 1, 
-                score: score + 1})
-        } else {
-            this.setState({ currentIndex: currentIndex + 1})
+
+        if (usersAnswer !== currentAnswer) {
+            document.getElementsByClassName(`${usersAnswer}`)
         }
-        // document.getElementsByClassName("cards-submit-button")[0].disabled = true
+
+        setTimeout(() => {
+            if (usersAnswer === currentAnswer) {
+                this.setState({ currentIndex: currentIndex + 1, 
+                    score: score + 1})
+            } else {
+                this.setState({ currentIndex: currentIndex + 1})
+            }
+
+        }, 3000)
     }
 
     generatePositionOfAnswers = (choices) => {
@@ -97,6 +106,7 @@ class Cards extends React.Component {
                     className={`cards-choice ${choice} ${usersAnswer === choice ? "selected" : ""}`}
                     onClick={(e) => this.handleAnswer(e, choice)} 
                 >
+                    {/* <i className="check-correct fas fa-check" id={choice}></i> */}
                     {choice}
                 </p>
             )
@@ -132,7 +142,14 @@ class Cards extends React.Component {
 
         return (
             <div className="cards-container">
-
+                <div className="score-count-container">
+                    <div className="display-score">
+                        Score: {score}
+                    </div>
+                    <div className="display-num-of-questions">
+                        {currentIndex < 10 ? currentIndex : 10} / 10
+                    </div>
+                </div>
                 {displayGameOrScore}
                 {/* <div className="question-container">
                     <div className="cards-question">
@@ -156,12 +173,6 @@ class Cards extends React.Component {
                     >
                         Submit
                     </button>
-                    <div className="display-score">
-                        Score: {score}
-                    </div>
-                    <div className="display-num-of-questions">
-                        {currentIndex < 10 ? currentIndex : 10} / 10
-                    </div>
                 </div>
             </div>
         );
