@@ -12,6 +12,5 @@ This project is built with React so we will need to use a package manager, more 
 5. Go to localhost:3000
 
 ## Plans for the Future
-* Add ability to play again.
-* Add animations upon answering the question.
 * Give users the ability to see past questions + answers.
+* Sound for correct and incorrect answers
