@@ -20,7 +20,6 @@ class Cards extends React.Component {
 
     handleAnswer = (e, choice) => {
         e.preventDefault();
-        // document.getElementById(choice).style.display = "none"
         this.setState({ usersAnswer: choice, disabled: false })
     }
 
@@ -28,14 +27,18 @@ class Cards extends React.Component {
         e.preventDefault();
         const { usersAnswer, currentAnswer, currentIndex, score } = this.state
         if (usersAnswer !== currentAnswer) {
-            // document.getElementsByClassName(`${usersAnswer}`)[0].style.backgroundColor = "red"
-            // document.getElementsByClassName(`${currentAnswer}`)[0].style.backgroundColor = "green"
-            // document.getElementsByTagName("button")[0].disabled = true
             document.getElementsByClassName(`${usersAnswer}`)[0].childNodes[1].style.display = "block";
             document.getElementsByClassName(`${currentAnswer}`)[0].childNodes[0].style.display = "block";
-            document.getElementsByTagName("button")[0].disabled = true
+            let buttons = document.getElementsByTagName("button")
+            for (let i = 0; i < buttons.length; i++) {
+                buttons[i].disabled = true;
+            }
         } else {
             document.getElementsByClassName(`${currentAnswer}`)[0].childNodes[0].style.display = "block";
+            let buttons = document.getElementsByTagName("button")
+            for (let i = 0; i < buttons.length; i++) {
+                buttons[i].disabled = true;
+            }
         }
 
         setTimeout(() => {
@@ -134,7 +137,7 @@ class Cards extends React.Component {
 
         if (choices.length > 1) {
             displayChoices = choices.map(choice => 
-                <p 
+                <button 
                     key={`${Math.random()}`} 
                     className={`cards-choice ${choice} ${usersAnswer === choice ? "selected" : ""}`}
                     onClick={(e) => this.handleAnswer(e, choice)} 
@@ -142,7 +145,7 @@ class Cards extends React.Component {
                     <i className="correct-answer fas fa-check"></i>
                     <i className="incorrect-answer fas fa-times"></i>
                     {choice}
-                </p>
+                </button>
             )
         }
 
